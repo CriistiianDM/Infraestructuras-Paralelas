@@ -9,8 +9,10 @@ if len(sys.argv) == 1:
   sys.exit(1)
 
 INPUT_FILE = sys.argv[1]
-FILENAME = os.path.splitext(INPUT_FILE)[0]
-OUTPUT_FILE = f"{FILENAME}.PNG"
+FILENAME = os.path.splitext(os.path.basename(INPUT_FILE))[0]
+
+OUTPUT_DIR = './public/result/'
+OUTPUT_FILE = os.path.join(OUTPUT_DIR, f"{FILENAME}.PNG") 
 
 # Leer el archivo binario y convertirlo a un array de NumPy
 width, height = 1024, 1024  # Asegúrate de que estas dimensiones coincidan con las usadas en el programa C
