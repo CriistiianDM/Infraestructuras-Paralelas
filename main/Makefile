@@ -1,7 +1,7 @@
 all: compile exe
 
 compile:
-	gcc -o main main.c
+	gcc -o main main.c -lm
 
 exe:
 	./all.sh

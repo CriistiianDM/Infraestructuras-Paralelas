@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 // Funciones placeholder para la carga y guardado de imágenes
 void cargarImagen(int *imagen, int width, int height);
@@ -80,7 +81,6 @@ void guardarImagen(int *imagen, int width, int height) {
     fclose(archivo);
 }
 
-
 void aplicarFiltro(int *imagen, int *imagenProcesada, int width, int height) {
     int Gx[3][3] = {{-1, 0, 1}, {-2, 0, 2}, {-1, 0, 1}};
     int Gy[3][3] = {{-1, -2, -1}, {0, 0, 0}, {1, 2, 1}};
@@ -98,9 +98,11 @@ void aplicarFiltro(int *imagen, int *imagenProcesada, int width, int height) {
                 }
             }
 
-            // Calcular magnitud del gradiente
-            int magnitude = abs(sumX) + abs(sumY);
-            imagenProcesada[y * width + x] = (magnitude > 255) ? 255 : magnitude;  // Normalizar a 8 bits
+            // Calcular la magnitud del gradiente
+            int magnitude = (int)sqrt(sumX * sumX + sumY * sumY);
+
+            // Normalizar a 8 bits
+            imagenProcesada[y * width + x] = (magnitude > 255) ? 255 : magnitude;
         }
     }
 }
